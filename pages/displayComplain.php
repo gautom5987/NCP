@@ -1,19 +1,19 @@
 <?php
-    session_start();
+session_start();
 
-    if(!isset($_SESSION['purpose'])) {
-        $_SESSION['purpose'] = 'ticket';
-    }
-    $purpose = $_SESSION['purpose'];
+if(!isset($_SESSION['purpose'])) {
+    $_SESSION['purpose'] = 'ticket';
+}
+$purpose = $_SESSION['purpose'];
 
-    $id = $_REQUEST['id'];
+$id = $_REQUEST['id'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "ncp";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ncp";
 
-    require_once "../res/strings.php";
+require_once "../res/strings.php";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -61,96 +61,182 @@ else {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Network Complaint Portal</title>
     <link rel="icon" href="../res/logo.png">
-    <title>Network Complain Portal</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/form-validation.css" rel="stylesheet">
+
+    <script type="text/javascript" defer>
+        function checkProblem(val) {
+            var element = document.getElementById('problemInput');
+            if (val === 'other')
+                element.style.display = 'block';
+            else
+                element.style.display = 'none';
+        }
+    </script>
 
 </head>
+<body class="bg-light">
 
-<body>
-<div align="center">
-    <img src="../res/mnnit.png" height="90" width="250">
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="../res/mnnit.png" alt="" width="250" height="90">
+            <h2>Complaint Information</h2>
+            <p class="lead">You can view complaint details here.</p>
+        </div>
+
+        <div class="row g-lg-3">
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Complaint Details</h4>
+                <form class="needs-validation"  method="POST" action="../verify/updateComplain.php?id=<?php echo $id ?>">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" value="<?php echo $uname ?>" name="name" class="form-control" id="name" placeholder="" required readonly>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" value="<?php echo $email ?>" name="email" class="form-control" id="email" placeholder="" required readonly>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="mobile" class="form-label">Mobile No.</label>
+                            <input type="number" value="<?php echo $mobile ?>" class="form-control" name="mobile" id="mobile" placeholder="" required readonly>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" value="<?php echo $ulocation ?>" id="location" name="location" required readonly>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="time" class="form-label">Availability time</label>
+                            <input type="text" value="<?php echo $fromt.'-' .$till ?>" class="form-control" id="avail" name="avail" required readonly/>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="problemName" class="form-label">Problem</label>
+                            <input type="text" value="<?php echo $str[$problemName] ?>" class="form-control" id="problemName" name="problemName" required readonly/>
+                        </div>
+
+                        <div class="col-12"  id="problemInput">
+                            <label for="problemDes" class="form-label">Problem Description</label>
+                            <textarea class="form-control" placeholder="<?php echo $problemDes ?>" id="problemDes" name="problemDes" rows="4" cols="50" required readonly></textarea>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="status" class="form-label">Status</label>
+                            <input type="text" value="<?php echo $isSolved ?>" class="form-control" name="status" id="status" required readonly>
+                        </div>
+
+                        <div  <?php if($purpose=='ticket') echo 'style="display : none"'; ?> >
+                        <label for="markAs" class="form-label">Mark as</label>
+                        <div class="my-3">
+                            <div class="form-check">
+                                <input id="solved" name="markAs" value="1" type="radio" class="form-check-input" required>
+                                <label class="form-check-label" for="solved">Solved</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="unsolved" name="markAs" value="0" type="radio" class="form-check-input" checked required>
+                                <label class="form-check-label" for="unsolved">Unsolved</label>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="asignee" class="form-label">Assigned to</label>
+                            <input type="text" value="<?php echo $asignee ?>" class="form-control" name="asignee" id="asignee" required readonly>
+                        </div>
+
+                        <div class="col-md-5" <?php if($purpose=='ticket' || $purpose=='tech') echo 'style="display : none"'; ?> >
+                            <label for="country" class="form-label">Assign to</label>
+                            <select class="form-select" name="selectedTechnician" <?php if($isSolved=="solved") echo "disabled"; ?> >
+                                <option value="" disabled selected>pick</option>
+                                <?php
+                                $sql = mysqli_query($conn, "SELECT * From TechnicianData");
+                                if($sql) {
+                                    $row = mysqli_num_rows($sql);
+                                    $ans = "";
+                                    while ($row = mysqli_fetch_array($sql)){
+                                        $ans .= '<option value="'. $row['id'] .'">' . $row['uname'] .'</option> ' ;
+                                    }
+                                    echo $ans;
+                                }
+                                ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select Technician.
+                            </div>
+                        </div>
+
+                        <div class="col-12"  id="adminComment"  <?php if($purpose=='ticket' || $purpose=='tech') echo 'style="display : none"'; ?> >
+                            <label for="problemDes" class="form-label">Admin Comments</label>
+                            <textarea class="form-control" id="adminComment" name="adminComment" rows="4" cols="50"><?php echo $adminComment ?></textarea>
+                        </div>
+
+                        <div class="col-12" <?php if($purpose=='ticket') echo 'style="display : none"'; ?> >
+                            <label for="techComment" class="form-label">Technician Comments</label>
+                            <textarea class="form-control" id="techComment" name="techComment" rows="10" cols="50" readonly><?php echo $techComment ?></textarea>
+                        </div>
+
+                        <div class="col-12" <?php if($purpose!='tech') echo 'style="display : none"'; ?> >
+                            <label for="newComment" class="form-label">Add Comments</label>
+                            <textarea class="form-control" id="newComment" name="newComment" rows="4" cols="50"></textarea>
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <button class="w-50 btn btn-primary btn-lg" id="submit" type="submit" <?php if($purpose=='ticket') echo 'style="display : none"'; ?>>Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2022 Computer Centre MNNIT</p>
+    </footer>
 </div>
-<h1 id="login">Complain Detail</h1>
 
-<br>
 
-<!-- <input type="text" placeholder="location" required=true> -->
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-<form method="POST" action="../verify/updateComplain.php?id=<?php echo $id ?>" class="box">
-    <p>Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo $uname ?>" name="name" required=true readonly></p>
-
-    <p>Email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="30" value="<?php echo $email ?>" name="email" required readonly></p>
-
-    <p>Mobile Number :&nbsp;&nbsp;&nbsp;<input value="<?php echo $mobile ?>" name="mobile" required readonly></p>
-
-    <p>Location :&nbsp;&nbsp;&nbsp;&nbsp;
-        <textarea name="location" rows="4" placeholder="<?php echo $ulocation ?>" cols="50" required readonly></textarea>
-    </p>
-
-    <p>Availability Time :&nbsp;&nbsp;&nbsp;<input value="<?php echo $fromt.'-' .$till ?>" name="avail" required readonly></p>
-
-    <p>Problem :&nbsp;&nbsp;&nbsp;
-        <input size="30" type="email" value="<?php echo $str[$problemName] ?>" name="problemName" required readonly>
-    </p>
-
-    <p>Problem Description :&nbsp;&nbsp;&nbsp;&nbsp;
-        <textarea name="problemDes" rows="4" placeholder="<?php echo $problemDes ?>" cols="50" required readonly></textarea>
-    </p>
-
-    <p>Status :&nbsp;&nbsp;&nbsp;<input value="<?php echo $isSolved ?>" name="status" required readonly></p>
-
-    <p <?php if($purpose=='ticket') echo 'style="display : none"'; ?> >Mark as :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="radio" name="markAs" value="1" required <?php //if($isSolved=="solved") echo "disabled"; ?> >
-        <label for="solved">Solved</label>
-        <input type="radio" name="markAs" value="0" required <?php //if($isSolved=="solved") echo "disabled"; ?> >
-        <label for="unsolved">Unsolved</label><br>
-    </p>
-
-    <p>Assigned to :&nbsp;&nbsp;&nbsp;<input value="<?php echo $asignee ?>" name="asignee" required readonly ></p>
-
-    <p <?php if($purpose=='ticket' || $purpose=='tech') echo 'style="display : none"'; ?> >Assign to :&nbsp;&nbsp;&nbsp;&nbsp;
-        <select name="selectedTechnician"<?php if($isSolved=="solved") echo "disabled"; ?> >
-            <option value="" disabled selected>pick</option>
-            <?php
-            $sql = mysqli_query($conn, "SELECT * From TechnicianData");
-            $row = mysqli_num_rows($sql);
-            $ans = "";
-            while ($row = mysqli_fetch_array($sql)){
-                $ans .= '<option value="'. $row['id'] .'">' . $row['uname'] .'</option> ' ;
-            }
-            echo $ans;
-            ?>
-
-        </select>
-    </p>
-
-    <p <?php if($purpose=='ticket' || $purpose=='tech') echo 'style="display : none"'; ?> >Admin Comments :  &nbsp;&nbsp;&nbsp;&nbsp;
-        <textarea name="adminComment" rows="4" cols="60"><?php echo $adminComment ?></textarea>
-    </p>
-
-    <p <?php if($purpose=='ticket') echo 'style="display : none"'; ?> >Technician Comments :  &nbsp;&nbsp;&nbsp;&nbsp;
-        <textarea name="techComment" rows="4" cols="60" readonly><?php echo $techComment ?></textarea>
-    </p>
-
-    <p <?php if($purpose!='tech') echo 'style="display : none"'; ?> >Add Comment :  &nbsp;&nbsp;&nbsp;&nbsp;
-        <textarea name="newComment" rows="4" cols="60"></textarea>
-    </p>
-
-    <br>
-
-    <input type="submit" value="   Update   " id="submit" <?php if($purpose=='ticket') echo 'style="display : none"'; ?> >
-
-</form>
-
+<script src="../assets/form-validation.js"></script>
 </body>
-
 </html>
 
 <?php
-    $conn->close();
+$conn->close();
 ?>

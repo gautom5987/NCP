@@ -44,7 +44,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Network Complain Portal';
+    $mail->Subject = 'Network Complaint Portal';
     $mail->Body    = 'This is your one time password for Network Complain Portal -> <b>'.$_SESSION["backendOtp"].'</b>';
     $mail->AltBody = 'This is your one time password for Network Complain Portal -> '.$_SESSION["backendOtp"];
 

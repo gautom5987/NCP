@@ -90,7 +90,7 @@ $conn->close();
 <?php
 
 echo "<script>alert('$value')</script>";
-echo "<script>if($flag==1){ location.replace('../index.php') }</script>";
+echo "<script>if($flag==1){ window.open('','_parent',''); window.close(); }</script>";
 echo "<script>if($flag==0){ location.replace('../pages/signup.php') }</script>";
 ?>
 </body>

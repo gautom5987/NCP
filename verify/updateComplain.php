@@ -38,17 +38,17 @@
     // storing data from the form
     if(isset($_POST['markAs'])) {
         $markAs = $_POST['markAs'];
-        $sql = $sql . "isSolved=$markAs, ";
+        $sql = $sql . "isSolved=$markAs";
     }
 
     if(isset($_POST['selectedTechnician'])) {
         $selectedTechnician = $_POST['selectedTechnician'];
-        $sql = $sql . "asignee = $selectedTechnician, ";
+        $sql = $sql . ", asignee = $selectedTechnician";
     }
 
     if($_SESSION['purpose']=="admin" && isset($_POST['adminComment'])) {
         $adminComment = $_POST['adminComment'];
-        $sql = $sql . "adminComment = '$adminComment'";
+        $sql = $sql . ", adminComment = '$adminComment'";
     }
 
     if($_SESSION['purpose']=="tech" && isset($_POST["newComment"])) {
@@ -57,7 +57,7 @@
         date_default_timezone_set('Asia/Kolkata');
         $date = date('m/d/Y h:i:s a', time());
         $techComment = $techComment . "\n\n" . $date . " " . $asignee . "->\t" . $newComment;
-        $sql = $sql . "techComment = '$techComment'";
+        $sql = $sql . ", techComment = '$techComment'";
     }
 
     $sql = $sql . " WHERE id=$id";
@@ -91,15 +91,17 @@
 echo "<script>alert('$value')</script>";
 
 if($markAs==1) {
-    echo "<script>if($flag==1){ window.open('../mail.php','_blank') }</script>";
+    echo "<script>if($flag==1){ window.open('mail.php','_blank') }</script>";
 }
 
 if($_SESSION['purpose']=='admin') {
-    echo "<script>if($flag==1){ location.replace('../pages/admin.php') }</script>";
-    echo "<script>if($flag==0){ location.replace('../pages/admin.php') }</script>";
+//    echo "<script>if($flag==1){ location.replace('../pages/admin.php') }</script>";
+//    echo "<script>if($flag==0){ location.replace('../pages/admin.php') }</script>";
+    echo "<script>window.open('','_parent',''); window.close();</script>";
 } else if($_SESSION['purpose']=='tech') {
-    echo "<script>if($flag==1){ location.replace('../pages/technician.php') }</script>";
-    echo "<script>if($flag==0){ location.replace('../pages/technician.php') }</script>";
+//    echo "<script>if($flag==1){ location.replace('../pages/technician.php') }</script>";
+//    echo "<script>if($flag==0){ location.replace('../pages/technician.php') }</script>";
+    echo "<script>window.open('','_parent',''); window.close();</script>";
 }
 
 die();

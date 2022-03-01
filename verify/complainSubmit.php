@@ -115,7 +115,7 @@
   <?php
 
     echo "<script>alert('$value')</script>";
-    echo "<script>if($flag==1){ window.open('../mail.php','_blank') }</script>";
+    echo "<script>if($flag==1){ window.open('mail.php','_blank') }</script>";
     echo "<script>if($flag==1){ location.replace('../index.php') }</script>";
     echo "<script>if($flag==0){ location.replace('../pages/complain.php') }</script>";
   ?>

@@ -12,8 +12,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
-require 'credentials.php';
+require '../vendor/autoload.php';
+require '../credentials.php';
 
 $mail = new PHPMailer(true);
 $flag = 0;
@@ -34,7 +34,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Network Complain Portal';
+    $mail->Subject = 'Network Complaint Portal';
     if($type=="id") {
         $mail->Body    = 'This is your ticket number -> <b>'.$id.'</b>';
         $mail->AltBody = 'This is your ticket number -> '.$id;
@@ -61,8 +61,8 @@ try {
 </head>
 <body>
   <?php
-//    echo "<script>if($flag==1){ alert('Ticket Number has been mailed to your email.'); }</script>";
-//    echo "<script>if($flag==0){ alert('Failed to send ticket number to your email.'); }</script>";
+    echo "<script>if($flag==1){ alert('Ticket Number has been mailed to your email.'); }</script>";
+    echo "<script>if($flag==0){ alert('Failed to send ticket number to your email.'); }</script>";
     echo "<script>window.open('','_parent',''); window.close();</script>";
   ?>
 </body>
