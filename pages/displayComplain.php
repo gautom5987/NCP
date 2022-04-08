@@ -141,7 +141,7 @@ else {
                         </div>
 
                         <div class="col-sm-6">
-                            <label for="time" class="form-label">Availability time</label>
+                            <label for="avail" class="form-label">Availability time</label>
                             <input type="text" value="<?php echo $fromt.'-' .$till ?>" class="form-control" id="avail" name="avail" required readonly/>
                         </div>
 
@@ -180,8 +180,8 @@ else {
                         </div>
 
                         <div class="col-md-5" <?php if($purpose=='ticket' || $purpose=='tech') echo 'style="display : none"'; ?> >
-                            <label for="country" class="form-label">Assign to</label>
-                            <select class="form-select" name="selectedTechnician" <?php if($isSolved=="solved") echo "disabled"; ?> >
+                            <label for="selectedTechnician" class="form-label">Assign to</label>
+                            <select class="form-select" name="selectedTechnician" id="selectedTechnician" <?php if($isSolved=="solved") echo "disabled"; ?> >
                                 <option value="" disabled selected>pick</option>
                                 <?php
                                 $sql = mysqli_query($conn, "SELECT * From TechnicianData");
@@ -201,7 +201,7 @@ else {
                         </div>
 
                         <div class="col-12"  id="adminComment"  <?php if($purpose=='ticket' || $purpose=='tech') echo 'style="display : none"'; ?> >
-                            <label for="problemDes" class="form-label">Admin Comments</label>
+                            <label for="adminComment" class="form-label">Admin Comments</label>
                             <textarea class="form-control" id="adminComment" name="adminComment" rows="4" cols="50"><?php echo $adminComment ?></textarea>
                         </div>
 

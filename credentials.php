@@ -1,8 +1,8 @@
 <?php
 // change smtp details here ->
-    $smtpHost = 'smtp.gmail.com';
-    $smtpUsername = 'garggautam72@gmail.com';
-    $smtpPassword = 'arkhamknight';
+    $smtpHost = '';
+    $smtpUsername = '';
+    $smtpPassword = '';
 
 //    Change admin credentials here ->
     $adminUsername = 'admin@gmail.com';
