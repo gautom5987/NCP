@@ -13,7 +13,6 @@ This is a website for college students and faculties to report network issues th
 7. Admin and Technician can add a complaint solved/unsolved and add suitable remarks for the same.
 8. Whenever a complaint is closed from the technician or admin end, user receives a mail that his issue has been resolved.
 
-<br>
 
 ### Tech Stack - 
 - HTML/CSS/JS
@@ -21,7 +20,6 @@ This is a website for college students and faculties to report network issues th
 - PHP
 - MYSQL
 
-<br>
 
 ### To try hands on the project - <br />
 1. Clone the project using link: https://github.com/gautom5987/ncp.git
@@ -51,7 +49,7 @@ Note - You can change Admin and SMTP details from the <b>credentials.php</b> fil
 <img src="screenshots/p3.png">
 </div><br>
 
-#### Complaint Details from user side
+#### Complaint Details from Admin side
 <div>
 <img src="screenshots/p4.png">
 <img src="screenshots/p5.png"><br />
