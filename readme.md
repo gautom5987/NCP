@@ -1,5 +1,5 @@
 <h2 align="center"> <b>Network Complaint Portal</b> </h2>
-This is a website for college students and faculties to report network issues they might be facing.
+This is a website for college students and faculties to report network issues they might be facing. This portal makes communication between network admin, user and technician much easier and faster.
 <br><br>
 
 ### Features - 
